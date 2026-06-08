@@ -1,0 +1,55 @@
+{
+  "id": "e2e-lead-status-default",
+  "testPlanId": "9017e92c-b157-44a9-be02-582a81924622",
+  "requirementId": "efa330ac-3b49-4472-8757-677268961d32",
+  "suiteName": "Create Lead - Lead Management",
+  "case": {
+    "id": "e2e-lead-status-default",
+    "title": "E2E: Verify Lead Status is set to default after creation",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step-1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce Leads tab",
+        "locatorHint": "Leads tab URL",
+        "value": "https://orgfarm-cdb7bbd1fc-dev-ed.develop.my.salesforce.com/lightning/o/Lead/list"
+      },
+      {
+        "id": "step-2",
+        "action": "tap",
+        "targetDescription": "Click on 'New' button",
+        "locatorHint": "button[title='New']"
+      },
+      {
+        "id": "step-3",
+        "action": "fill",
+        "targetDescription": "Enter all mandatory fields",
+        "locatorHint": "input[name='LastName'], input[name='Company']",
+        "value": "Smith, ABC Technologies"
+      },
+      {
+        "id": "step-4",
+        "action": "tap",
+        "targetDescription": "Click on 'Save' button",
+        "locatorHint": "button[title='Save']"
+      },
+      {
+        "id": "step-5",
+        "action": "assertText",
+        "targetDescription": "Verify Lead Status is 'Open - Not Contacted'",
+        "locatorHint": "span[data-field='Status']",
+        "assertion": "Open - Not Contacted"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression",
+      "lead"
+    ]
+  }
+}

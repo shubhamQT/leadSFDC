@@ -1,0 +1,54 @@
+{
+  "id": "functional-create-lead-missing-lastname",
+  "testPlanId": "9017e92c-b157-44a9-be02-582a81924622",
+  "requirementId": "efa330ac-3b49-4472-8757-677268961d32",
+  "suiteName": "Create Lead - Lead Management",
+  "case": {
+    "id": "functional-create-lead-missing-lastname",
+    "title": "Functional: Show validation error when Last Name is blank",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step-1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce Leads tab",
+        "locatorHint": "Leads tab URL",
+        "value": "https://orgfarm-cdb7bbd1fc-dev-ed.develop.my.salesforce.com/lightning/o/Lead/list"
+      },
+      {
+        "id": "step-2",
+        "action": "tap",
+        "targetDescription": "Click on 'New' button",
+        "locatorHint": "button[title='New']"
+      },
+      {
+        "id": "step-3",
+        "action": "fill",
+        "targetDescription": "Enter Company (mandatory)",
+        "locatorHint": "input[name='Company']",
+        "value": "ABC Technologies"
+      },
+      {
+        "id": "step-4",
+        "action": "tap",
+        "targetDescription": "Click on 'Save' button",
+        "locatorHint": "button[title='Save']"
+      },
+      {
+        "id": "step-5",
+        "action": "assertVisible",
+        "targetDescription": "Verify validation error for missing Last Name",
+        "locatorHint": ".errorsList li"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression",
+      "lead"
+    ]
+  }
+}

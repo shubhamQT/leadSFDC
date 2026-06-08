@@ -1,1 +1,11 @@
-{}
+{
+  "lead": {
+    "firstName": "John",
+    "lastName": "Smith",
+    "company": "ABC Technologies",
+    "phone": "9989876789",
+    "email": "john.smith@example.com",
+    "leadSource": "Web",
+    "statusDefault": "Open - Not Contacted"
+  }
+}

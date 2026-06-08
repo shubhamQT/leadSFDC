@@ -1,2 +1,19 @@
-.git-users/
+# Dependencies
 node_modules/
+
+# Playwright output
+test-results/
+playwright-report/
+logs/*.json
+logs/*.html
+logs/*.zip
+
+# Cloud execution — contain credentials, never commit
+execution/.env.execution
+browserstack.yml
+
+# Auth state — contains session cookies/tokens, never commit
+.auth/
+
+# Recorder artifacts
+.dom-captures/
