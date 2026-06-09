@@ -45,12 +45,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install
-          fi
+        run: npm install
 
       - run: npx playwright install --with-deps chromium
 
@@ -87,10 +82,16 @@ jobs:
           if [ "${{ steps.run.outcome }}" != "success" ]; then
             STATUS="failed"
           fi
-          curl -s -X POST "${{ inputs.callback_url }}" \
-            -H "Content-Type: application/json" \
-            -d "{
-              \"status\": \"${STATUS}\",
-              \"run_id\": \"${{ inputs.run_id }}\",
-              \"pipelineUrl\": \"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
-            }" || true
+          PAYLOAD="{\"status\":\"${STATUS}\",\"run_id\":\"${{ inputs.run_id }}\",\"pipelineUrl\":\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}"
+          for attempt in 1 2 3 4 5; do
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "${{ inputs.callback_url }}" \
+              -H "Content-Type: application/json" \
+              -d "$PAYLOAD")
+            echo "Attempt $attempt — HTTP $HTTP_CODE"
+            if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+              echo "Callback delivered."
+              break
+            fi
+            [ $attempt -lt 5 ] && sleep $((attempt * 10))
+          done
+          true

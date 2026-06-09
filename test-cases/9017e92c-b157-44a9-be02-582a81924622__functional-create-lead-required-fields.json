@@ -1,0 +1,61 @@
+{
+  "id": "functional-create-lead-required-fields",
+  "testPlanId": "9017e92c-b157-44a9-be02-582a81924622",
+  "requirementId": "efa330ac-3b49-4472-8757-677268961d32",
+  "suiteName": "Create Lead - Lead Management",
+  "case": {
+    "id": "functional-create-lead-required-fields",
+    "title": "Functional: Create Lead with only required fields",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step-1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce Leads tab",
+        "locatorHint": "Leads tab URL",
+        "value": "https://orgfarm-cdb7bbd1fc-dev-ed.develop.my.salesforce.com/lightning/o/Lead/list"
+      },
+      {
+        "id": "step-2",
+        "action": "tap",
+        "targetDescription": "Click on 'New' button",
+        "locatorHint": "button[title='New']"
+      },
+      {
+        "id": "step-3",
+        "action": "fill",
+        "targetDescription": "Enter Last Name (mandatory)",
+        "locatorHint": "input[name='LastName']",
+        "value": "Smith"
+      },
+      {
+        "id": "step-4",
+        "action": "fill",
+        "targetDescription": "Enter Company (mandatory)",
+        "locatorHint": "input[name='Company']",
+        "value": "ABC Technologies"
+      },
+      {
+        "id": "step-5",
+        "action": "tap",
+        "targetDescription": "Click on 'Save' button",
+        "locatorHint": "button[title='Save']"
+      },
+      {
+        "id": "step-6",
+        "action": "assertVisible",
+        "targetDescription": "Verify Lead record page is displayed",
+        "locatorHint": "h1[title='Smith']"
+      }
+    ],
+    "tags": [
+      "@functional",
+      "@regression",
+      "lead"
+    ]
+  }
+}
